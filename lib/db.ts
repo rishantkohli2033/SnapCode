@@ -1,5 +1,7 @@
 import mongoose, { Connection } from "mongoose";
-let cachedConnection:Connection | null = null
+
+let cachedConnection: Connection | null = null;
+
 export async function connectToMongoDB(){
     if(cachedConnection){
         console.log("Using Cached Connection");

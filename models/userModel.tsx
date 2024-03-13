@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema<IUserDocument>({
     },
     fullName:{
         type: String,
-        required: true
+        default: ""
     },
     email:{
         type: String,
