@@ -3,7 +3,6 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const ChatUserInfo = async() => {
 	const session = await auth();
-	console.log(session);
 	const userFullName = session?.user.name;
 	const userAvatar = session?.user.image;
 

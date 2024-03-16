@@ -15,10 +15,10 @@ const chatSchema = new mongoose.Schema<IChatDocument>({
         type: mongoose.Schema.Types.ObjectId, ref: "User"
     }],
     messages: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "User"
+        type: mongoose.Schema.Types.ObjectId, ref: "Message"
     }]
 },{timestamps:true});
 
-const Chat: Model<IChatDocument> = mongoose.models?.User || mongoose.model("Chat", chatSchema);
+const Chat: Model<IChatDocument> = mongoose.models?.Chat || mongoose.model("Chat", chatSchema);
 
 export default Chat;
