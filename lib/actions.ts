@@ -48,13 +48,13 @@ export const sendMessageAction = async(receiverId: string, content: string, mess
 			participants: { $all: [senderId, receiverId] },
 		});
         
-        if (!chat) {
+        if (!chat) {  //sending message for the first time
 			chat = await Chat.create({
 				participants: [senderId, receiverId],
 				messages: [newMessage._id],
 			});
             
-		} else {
+		} else { //already have chat history
 			chat.messages.push(newMessage._id);
 			await chat.save();
 		}
