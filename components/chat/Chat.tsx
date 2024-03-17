@@ -56,7 +56,7 @@ const Chat = ({chat}: ChatProps) => {
 				</Avatar>
 
 				<div className='ml-3'>
-					<p>{userToChat?.fullName}</p>
+					<p>{userToChat?.fullName ? userToChat.fullName : "User"}</p>
 					<p className='text-gray-400 text-xs flex gap-1'>
 						{iconComponent}
 						{messageStatus} - {formattedDate}

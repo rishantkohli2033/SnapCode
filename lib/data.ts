@@ -1,5 +1,6 @@
 import Message, { IMessageDocument } from "@/models/messageModel";
 import User, { IUserDocument } from "@/models/userModel"
+import { connectToMongoDB } from "./db";
 
 export const getUsersForSidebar = async (authUserId:string) => {
     try {
@@ -33,3 +34,16 @@ export const getUsersForSidebar = async (authUserId:string) => {
         throw error;
     }
 }
+
+export const getUserProfile = async (userId: string) => {
+	
+	try {
+		await connectToMongoDB();
+		const user: IUserDocument | null = await User.findById(userId);
+		if (!user) throw new Error("User not found");
+		return user;
+	} catch (error) {
+		console.log("Error in getUserProfile: ", error);
+		throw error;
+	}
+};
