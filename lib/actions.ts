@@ -4,6 +4,7 @@ import { connectToMongoDB } from "./db";
 import { v2 as cloudinary } from "cloudinary";
 import Message, { IMessageDocument } from "@/models/messageModel";
 import Chat, { IChatDocument } from "@/models/chatModel";
+import { revalidatePath } from "next/cache";
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -58,6 +59,7 @@ export const sendMessageAction = async(receiverId: string, content: string, mess
 			chat.messages.push(newMessage._id);
 			await chat.save();
 		}
+        revalidatePath(`/chat/$${receiverId}`); //to refresh the page to get new data(will fetch latest data for the page)
         return newMessage;
     } catch (error:any) {
         console.error("Error in sendMessage:", error.message);

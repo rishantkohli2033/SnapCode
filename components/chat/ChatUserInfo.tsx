@@ -2,7 +2,6 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { IUserDocument } from "@/models/userModel";
 
 const ChatUserInfo = async({userData}: {userData: IUserDocument}) => {
-	console.log(userData.email)
 	const userFullName = userData.fullName ? userData.fullName : "User";
 	const userAvatar = userData.avatar;
 

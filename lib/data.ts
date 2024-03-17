@@ -1,6 +1,7 @@
 import Message, { IMessageDocument } from "@/models/messageModel";
 import User, { IUserDocument } from "@/models/userModel"
 import { connectToMongoDB } from "./db";
+import Chat, { IChatDocument } from "@/models/chatModel";
 
 export const getUsersForSidebar = async (authUserId:string) => {
     try {
@@ -44,6 +45,30 @@ export const getUserProfile = async (userId: string) => {
 		return user;
 	} catch (error) {
 		console.log("Error in getUserProfile: ", error);
+		throw error;
+	}
+};
+
+export const getMessages = async (authUserId: string, otherUserId: string) => {
+	try {
+		await connectToMongoDB();
+
+		const chat: IChatDocument | null = await Chat.findOne({
+			participants: { $all: [authUserId, otherUserId] },
+		}).populate({
+			path: "messages",
+			populate: {
+				path: "sender",
+				model: "User",
+				select: "fullName",
+			},
+		});
+
+		if (!chat) return [];
+		const messages = chat.messages;
+		return JSON.parse(JSON.stringify(messages));
+	} catch (error) {
+		console.log("Error in getMessages: ", error);
 		throw error;
 	}
 };
