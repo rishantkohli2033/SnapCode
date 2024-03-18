@@ -1,6 +1,5 @@
 import ChatCamera from "@/components/chat/ChatCamera";
 import Image from "next/image";
-
 export default function ChatRootPage() {
 	return (
 		<main className='flex-grow bg-sigMain items-center flex px-2'>

@@ -12,7 +12,6 @@ export const GET = async () => {
 		const users: IUserDocument[] = await User.find();
 		// Filter the authenticated user from the list
 		const filteredUsers = users.filter((user) => user._id.toString() !== session.user._id.toString());
-        console.log(filteredUsers)
 		return NextResponse.json(filteredUsers);
 	} catch (error) {
 		console.log("Error in get-users route handler", error);

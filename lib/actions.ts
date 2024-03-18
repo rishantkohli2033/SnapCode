@@ -4,7 +4,7 @@ import { connectToMongoDB } from "./db";
 import { v2 as cloudinary } from "cloudinary";
 import Message, { IMessageDocument } from "@/models/messageModel";
 import Chat, { IChatDocument } from "@/models/chatModel";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import { redirect } from "next/navigation";
 
 cloudinary.config({
@@ -30,6 +30,7 @@ export async function logout(){
 }
 
 export const sendMessageAction = async(receiverId: string, content: string, messageType: "image" | "text") => {
+	noStore(); //to make sure data is not cached, it will help in fetching latest data
     try {
         const session = await auth();
         if(!session) return;
