@@ -8,6 +8,7 @@ import { getUsersForSidebar } from "@/lib/data";
 import Chats from "./Chats";
 import { Suspense } from "react";
 import { ChatsSkeleton } from "../skeletons/chatSkeletons";
+import Link from "next/link";
 
 const ChatSideBar = async () => {
 	const session = await auth();
@@ -17,9 +18,12 @@ const ChatSideBar = async () => {
 			<div className='sticky top-0 bg-black z-50'>
 				<div className='flex items-center justify-between p-4 border-b border-gray-800 '>
 					<div className='relative'>
-						<Avatar className='cursor-pointer hover:bg-sigBackgroundSecondaryHover'>
-							<AvatarImage src={session?.user?.image!} />
-						</Avatar>
+						<Link href={"/chat"}>
+							<Avatar className='cursor-pointer hover:bg-sigBackgroundSecondaryHover'>
+								<AvatarImage src={session?.user?.image!} />
+							</Avatar>
+						</Link>
+						
 					</div>
 					<Button className='bg-sigButton hover:bg-sigButtonHover text-white rounded-full h-8 w-8 relative p-2'>
 						<Image src={"/chat.svg"} fill alt='Chat icon' />
