@@ -23,7 +23,7 @@ const ChatMessages = ({ messages, session }: ChatMessagesProps) => {
 	}, [messages]);
 	return (
 		<>
-			{messages.map((message, idx) => {
+			{messages.length==0 ? <div className="flex justify-center">Say hi!!👋🏻👋🏻</div> :messages.map((message, idx) => {
 				const amISender = message.sender._id === session?.user?._id;
 				const senderFullName = message.sender.fullName ? message.sender.fullName.toUpperCase() : "User";
 				const isMessageImage = message.messageType === "image";
